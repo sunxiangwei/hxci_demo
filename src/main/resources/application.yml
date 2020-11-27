@@ -1,0 +1,28 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: eureka-zuul
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:7002/eureka
+zuul:
+  routes:
+    rout1:
+      serviceId: eureka-provider
+      path: /provider/**
+#  ignored-services: '*'   # \u5173\u95ED\u9ED8\u8BA4\u8DEF\u7531\u914D\u7F6E\u89C4\u5219
+#    eureka-customer:
+#      path: /ec/**
+    eureka-customer: /customer/**
+
+  ribbon:
+    eager-load:
+      enabled: true
+  SendResponseFilter:
+    pre:
+      disable: true
